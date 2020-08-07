@@ -17,8 +17,7 @@ export class NewPostComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  // ALWAYS HAVE TO REFRESH PAGE A SECOND TIME TO GET THE CHANGE 
+  
   formSubmit(): void {
     this.blogPost.tags = this.tags.split(",").map(tag => tag.trim());
     this.blogPost.isPrivate = false;
@@ -26,8 +25,9 @@ export class NewPostComponent implements OnInit {
     this.blogPost.postedBy = "WEB422 Student";
     this.blogPost.views = 0;
 
-    this.data.newPost(this.blogPost).subscribe();
-    this.router.navigate([`admin`]);
+    this.data.newPost(this.blogPost).subscribe(() => {
+      this.router.navigate([`admin`]);
+    });
   }
 
 }

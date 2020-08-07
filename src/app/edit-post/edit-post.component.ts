@@ -24,13 +24,15 @@ export class EditPostComponent implements OnInit {
   
   formSubmit(): void {
     this.blogPost.tags = this.tags.split(",").map(tag => tag.trim());
-    this.data.updatePostById(this.blogPost._id, this.blogPost).subscribe();
-    this.router.navigate([`admin`]);
+    this.data.updatePostById(this.blogPost._id, this.blogPost).subscribe(() => {
+      this.router.navigate([`admin`]);
+    });
   }
 
   deletePost(): void {
-    this.data.deletePostById(this.blogPost._id).subscribe();
-    this.router.navigate([`admin`]);
+    this.data.deletePostById(this.blogPost._id).subscribe(() => {
+      this.router.navigate([`admin`]);
+    });
   }
 
 }

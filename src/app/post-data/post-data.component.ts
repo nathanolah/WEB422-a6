@@ -15,7 +15,8 @@ export class PostDataComponent implements OnInit {
   querySub: any;
   commentName: String;
   commentText: String;
-  comment: Comment = new Comment();
+  // comment: Comment = new Comment();
+  comment: Comment;
   
   constructor(private data: PostService, private route: ActivatedRoute) { }
   
@@ -34,18 +35,15 @@ export class PostDataComponent implements OnInit {
   }
 
   submitComment(): void {
+    this.comment = new Comment();
     this.comment.author = <string>this.commentName;
     this.comment.comment = <string>this.commentText;
     this.comment.date = new Date().toLocaleDateString();
     this.post.comments.push(this.comment);
-    this.data.updatePostById(this.post._id, this.post).subscribe();
-
-    // Reset to empty state
-    this.commentName = "";
-    this.commentText = "";
-
-    // Reload the page
-    window.location.reload();
+    this.data.updatePostById(this.post._id, this.post).subscribe(() => {
+      this.commentName = "";
+      this.commentText = "";
+    });
   }
 
 }
