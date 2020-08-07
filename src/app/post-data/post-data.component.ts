@@ -15,7 +15,6 @@ export class PostDataComponent implements OnInit {
   querySub: any;
   commentName: String;
   commentText: String;
-  // comment: Comment = new Comment();
   comment: Comment;
   
   constructor(private data: PostService, private route: ActivatedRoute) { }
